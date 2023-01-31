@@ -37,26 +37,28 @@ function StatusHeading({ name, success }: Launch) {
 
 function Body({ core, payloads, success }: Launch) {
   return (
-    <div className={css.body}>
-      <div>
-        <strong>Status</strong>
-        <span style={{ color: success ? 'var(--success)' : 'var(--failure)' }}>
-          {success ? 'Successful' : 'Failure'}
-        </span>
+    <>
+      <div className={css.body}>
+        <div>
+          <strong>Status</strong>
+          <span className={success ? css.text_success : css.text_failure}>{success ? 'Successful' : 'Failure'}</span>
+        </div>
+
+        <div>
+          <strong>Core</strong>
+          <span>{core}</span>
+        </div>
       </div>
 
-      <div>
-        <strong>Core</strong>
-        <span>{core}</span>
-      </div>
+      <div style={{ display: 'grid', borderTop: '0.25rem solid var(--black)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 1rem' }}>
+          <strong style={{ textTransform: 'uppercase' }}>Payloads</strong>
+          <span>{payloads.length}</span>
+        </div>
 
-      <div>
-        <strong>Payloads</strong>
-        <span>{payloads.length}</span>
+        {mapToJSX(payloads, PayloadSlot)}
       </div>
-
-      {mapToJSX(payloads, PayloadSlot)}
-    </div>
+    </>
   );
 }
 
@@ -64,10 +66,10 @@ function StatusBody({ details, failureReason }: Launch) {
   const hasFailureReason = failureReason !== undefined;
   return (
     <div className={css.body}>
-      {mount(hasFailureReason, <strong style={{ textTransform: 'uppercase' }}>Reason</strong>)}
-      {mount(hasFailureReason, <p style={{ fontSize: '1.25em', marginBottom: 16 }}>{failureReason}</p>)}
-      <strong style={{ textTransform: 'uppercase' }}>Details</strong>
-      <p style={{ fontSize: '1.25em' }}>{details || 'There is currently no details available'}</p>
+      {mount(hasFailureReason, <strong>Reason</strong>)}
+      {mount(hasFailureReason, <p>{failureReason}</p>)}
+      <strong>Details</strong>
+      <p>{details || 'There is currently no details available'}</p>
     </div>
   );
 }
@@ -87,7 +89,7 @@ function PayloadSlot(props: Payload) {
 
 function Launch(props: LaunchProps) {
   const { id, name, image_url, success, showStatus, onButtonClick } = props;
-  const statusClassName = success ? css.status_success : css.status_failure;
+  const statusClassName = success ? css.bg_success : css.bg_failure;
   const className = classNames(css.card, showStatus ? statusClassName : null);
   const headerClassName = classNames(css.header, showStatus ? statusClassName : null);
   const buttonClassName = classNames(css.button, !showStatus ? statusClassName : null);
@@ -103,21 +105,21 @@ function Launch(props: LaunchProps) {
         {mount(showStatus, <StatusHeading {...props} />)}
       </header>
 
+      {mount(
+        !showStatus,
+        <div className={css.image_wrapper}>
+          <img src={image_url} alt={name} />
+        </div>
+      )}
+
       {mount(!showStatus, <Body {...props} />)}
       {mount(showStatus, <StatusBody {...props} />)}
 
-      <footer className={css.footer}>
-        <div>
-          <img src={image_url} alt={name} className={css.image} />
-        </div>
-
-        <div>
-          <button className={buttonClassName} onClick={onClick}>
-            {mount(showStatus, <CloseIcon />)}
-            {mount(!showStatus, <ButtonIcon />)}
-          </button>
-        </div>
-      </footer>
+      <button className={buttonClassName} onClick={onClick}>
+        {mount(showStatus, <CloseIcon />)}
+        {mount(!showStatus, <ButtonIcon />)}
+        <span>{showStatus ? 'Close' : 'Details'}</span>
+      </button>
     </div>
   );
 }
