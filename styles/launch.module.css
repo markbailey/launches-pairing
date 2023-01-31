@@ -20,9 +20,6 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-}
-
-.card:not(.card_back) .header {
   background-color: var(--gray-light);
 }
 
@@ -69,6 +66,7 @@
   background-color: var(--black);
   padding: 1rem;
   border-radius: 50%;
+  border: 0.5rem solid var(--gray-light);
   margin: 1rem auto 0.5rem;
   align-content: center;
   justify-content: center;
