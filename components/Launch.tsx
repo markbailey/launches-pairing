@@ -50,9 +50,9 @@ function Body({ core, payloads, success }: Launch) {
         </div>
       </div>
 
-      <div style={{ display: 'grid', borderTop: '0.25rem solid var(--black)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 1rem' }}>
-          <strong style={{ textTransform: 'uppercase' }}>Payloads</strong>
+      <div className={css.payloads_wrapper}>
+        <div>
+          <strong>Payloads</strong>
           <span>{payloads.length}</span>
         </div>
 

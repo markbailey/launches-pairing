@@ -31,3 +31,7 @@ body {
 body {
   padding: 1rem;
 }
+
+strong {
+  text-transform: uppercase;
+}

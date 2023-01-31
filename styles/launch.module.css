@@ -53,10 +53,6 @@
   text-transform: uppercase;
 }
 
-.body strong {
-  text-transform: uppercase;
-}
-
 .body p {
   margin-bottom: 1rem;
 }
@@ -107,14 +103,24 @@
   line-height: 1;
 }
 
-/* Payload */
+/* Payloads */
+.payloads_wrapper {
+  display: grid;
+  border-top: 0.25rem solid var(--black);
+}
+
+.payloads_wrapper > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
 .payload {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  margin-top: 0.5rem;
   background-color: var(--gray-light);
 }
 
