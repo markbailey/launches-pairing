@@ -1,4 +1,4 @@
-import React, { createContext, memo } from 'react';
+import React, { createContext } from 'react';
 import css from '../styles/grid.module.css';
 
 export interface GridState {
@@ -23,4 +23,4 @@ function SimpleGrid(props: { children: (state: GridState) => React.ReactNode }) 
   );
 }
 
-export default memo(SimpleGrid);
+export default SimpleGrid;
