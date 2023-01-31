@@ -1,35 +1,33 @@
-import launchData from '../data/launches-test.json';
-import Card from '../components/Launch';
 import show, { mount } from '../utilities/show';
+
+const Component = () => <div>Test Component</div>;
 
 describe('show utility function', () => {
   it('Verify that function can show and hide a node', async () => {
-    const launch = launchData[0];
-    const shown = show(true, <Card {...launch} />);
-    const hidden = show(false, <Card {...launch} />);
-    const unmounted = show(false, <Card {...launch} />, true);
+    const shown = show(true, <Component />);
+    const hidden = show(false, <Component />);
+    const unmounted = show(false, <Component />, true);
 
     expect(shown).not.toBeNull();
     expect(hidden).not.toBeNull();
     expect(unmounted).toBeNull();
 
-    expect(shown.props).toEqual({ children: <Card {...launch} /> });
+    expect(shown.props).toEqual({ children: <Component /> });
 
     expect(hidden.type).toBeInstanceOf(Function);
     expect(hidden.type.name).toBe('Hidden');
-    expect(hidden.props).toEqual({ children: <Card {...launch} /> });
+    expect(hidden.props).toEqual({ children: <Component /> });
   });
 });
 
 describe('mount utility function', () => {
   it('Verify that function can mount and unmount a node', async () => {
-    const launch = launchData[0];
-    const mounted = mount(true, <Card {...launch} />);
-    const unmounted = mount(false, <Card {...launch} />);
+    const mounted = mount(true, <Component />);
+    const unmounted = mount(false, <Component />);
 
     expect(mounted).not.toBeNull();
     expect(unmounted).toBeNull();
 
-    expect(mounted.props).toEqual({ children: <Card {...launch} /> });
+    expect(mounted.props).toEqual({ children: <Component /> });
   });
 });
