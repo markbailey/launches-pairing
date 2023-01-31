@@ -65,7 +65,7 @@ export default function Home(props: HomeProps) {
       {mount(
         attempts > 0,
         <Alert
-          message="We are having trouble communicating with the API server, Please check you internet connection."
+          message="Oh no! we are having trouble communicating with the API server, Please check you internet connection."
           severity="danger"
         />
       )}
